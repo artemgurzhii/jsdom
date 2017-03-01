@@ -78,6 +78,7 @@
     "test-tuwpt": "mocha test/web-platform-tests/to-upstream.js",
     "test-mocha": "mocha",
     "test-mocha-all": "mocha test/index.js",
+    "test-api": "mocha test/api",
     "test-old": "node ./test/runner",
     "test": "npm run test-mocha-all && npm run test-old",
     "test-karma": "karma start test/karma.conf.js",
