@@ -113,7 +113,7 @@ describe("API: encoding detection", () => {
     });
   });
 
-  describe("constructor, given binary data", () => {
+  describe("constructor, given binary data", { skipIfBrowser: true }, () => {
     for (const binaryDataType of Object.keys(factories)) {
       const factory = factories[binaryDataType];
 
@@ -137,7 +137,7 @@ describe("API: encoding detection", () => {
     }
   });
 
-  describe("fromFile", () => {
+  describe("fromFile", { skipIfBrowser: true }, () => {
     for (const encodingFixture of Object.keys(encodingFixtures)) {
       const { name, body } = encodingFixtures[encodingFixture];
 
@@ -150,7 +150,7 @@ describe("API: encoding detection", () => {
     }
   });
 
-  describe("fromURL", () => {
+  describe("fromURL", { skipIfBrowser: true }, () => {
     let server;
     let host;
     before(() => {
