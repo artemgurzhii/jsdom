@@ -197,8 +197,8 @@ exports.createServer = handler => {
 exports.createHTTPSServer = handler => {
   return new Promise(resolve => {
     const options = {
-      key: fs.readFileSync(path.resolve(__dirname, "jsdom/files/key.pem")),
-      cert: fs.readFileSync(path.resolve(__dirname, "jsdom/files/cert.pem"))
+      key: fs.readFileSync(path.resolve(__dirname, "api/fixtures/key.pem")),
+      cert: fs.readFileSync(path.resolve(__dirname, "api/fixtures/cert.pem"))
     };
 
     const server = https.createServer(options, handler);
