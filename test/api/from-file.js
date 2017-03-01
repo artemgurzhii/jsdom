@@ -11,7 +11,7 @@ function fromFixtureFile(fixture, options) {
   return JSDOM.fromFile(path.resolve(__dirname, "fixtures/from-file", fixture), options);
 }
 
-describe("newapi1: JSDOM.fromFile", () => {
+describe("API: JSDOM.fromFile()", () => {
   it("should return a rejected promise for a nonexistant file", () => {
     return Promise.all([
       assert.isRejected(JSDOM.fromFile(undefined)),

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// For: nodeunit
 
 var nodeunit = require('nodeunit'),
     path = require('path');

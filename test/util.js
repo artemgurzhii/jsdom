@@ -1,4 +1,5 @@
 "use strict";
+// For: Mocha and nodeunit
 const path = require("path");
 const jsdom = require("../lib/jsdom");
 const fs = require("fs");

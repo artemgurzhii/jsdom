@@ -4,7 +4,7 @@ const { describe, it } = require("mocha-sugar-free");
 
 const { JSDOM } = require("../../lib/newapi1.js");
 
-describe("newapi1: JSDOM.fragment", () => {
+describe("API: JSDOM.fragment()", () => {
   it("should return a DocumentFragment", () => {
     const frag = JSDOM.fragment(``);
 

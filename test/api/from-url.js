@@ -10,7 +10,7 @@ const { version: packageVersion } = require("../../package.json");
 
 require("chai").use(require("../chai-helpers.js"));
 
-describe("newapi1: JSDOM.fromURL", () => {
+describe("API: JSDOM.fromURL()", () => {
   it("should return a rejected promise for a bad URL", () => {
     return Promise.all([
       assert.isRejected(JSDOM.fromURL("asdf"), TypeError),

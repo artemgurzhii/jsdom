@@ -89,7 +89,7 @@ const encodingFixtures = {
   }
 };
 
-describe("newapi1 encoding detection", () => {
+describe("API: encoding detection", () => {
   describe("constructor, given a string", () => {
     it("should default to UTF-8 when passing a string", () => {
       const dom = new JSDOM("©");

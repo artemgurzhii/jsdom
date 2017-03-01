@@ -5,7 +5,7 @@ const { describe, it } = require("mocha-sugar-free");
 
 const { JSDOM } = require("../../lib/newapi1.js");
 
-describe("newapi1 methods", () => {
+describe("API: JSDOM class's methods", () => {
   describe("serialize", () => {
     it("should serialize the default document correctly", () => {
       const dom = new JSDOM();

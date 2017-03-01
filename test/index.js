@@ -1,22 +1,25 @@
 "use strict";
+// For: Mocha
+// This includes all tests that are run using Mocha, including web-platform-tests.
+// Whether a test runs in Node, the browser, or both is determined using annotations inside each test.
 
-require("./newapi1/basics.js");
-require("./newapi1/encoding.js");
-require("./newapi1/fragment.js");
-require("./newapi1/from-file.js");
-require("./newapi1/from-url.js");
-require("./newapi1/methods.js");
-require("./newapi1/options.js");
-require("./newapi1/virtual-console.js");
+require("./api/basics.js");
+require("./api/encoding.js");
+require("./api/fragment.js");
+require("./api/from-file.js");
+require("./api/from-url.js");
+require("./api/methods.js");
+require("./api/options.js");
+require("./api/virtual-console.js");
 
-require("./jsdom/cancel-requests.js");
-require("./jsdom/cookie.js");
-require("./jsdom/env.js");
-require("./jsdom/inside-worker-smoke-tests.js");
-require("./jsdom/keep-alive-connections.js");
-require("./jsdom/named-properties-tracker.js");
-require("./jsdom/resource-loading.js");
-require("./jsdom/utils.js");
+require("./old-api/cancel-requests.js");
+require("./old-api/cookie.js");
+require("./old-api/env.js");
+require("./old-api/inside-worker-smoke-tests.js");
+require("./old-api/keep-alive-connections.js");
+require("./old-api/named-properties-tracker.js");
+require("./old-api/resource-loading.js");
+require("./old-api/utils.js");
 
 require("./to-port-to-wpts/css.js");
 require("./to-port-to-wpts/jsonp.js");

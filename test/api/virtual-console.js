@@ -22,7 +22,7 @@ const consoleMethods = [
   "warn"
 ];
 
-describe("Virtual console", () => {
+describe("API: virtual consoles", () => {
   it("should send output only to the appropriate window", () => {
     const vc1 = new VirtualConsole();
     const vc2 = new VirtualConsole();

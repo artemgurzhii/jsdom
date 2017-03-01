@@ -4,7 +4,7 @@ const { describe, it } = require("mocha-sugar-free");
 
 const { JSDOM } = require("../../lib/newapi1.js");
 
-describe("newapi1 basic functionality", () => {
+describe("JSDOM instances: basics", () => {
   it("should have a window and a document", () => {
     const dom = new JSDOM();
 
@@ -19,7 +19,7 @@ describe("newapi1 basic functionality", () => {
   });
 });
 
-describe("newapi1 first argument", () => {
+describe("JSDOM() constructor first argument", () => {
   it("should populate the resulting document with the given HTML", () => {
     const document = (new JSDOM(`<a id="test" href="#test">`)).window.document;
 

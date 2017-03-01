@@ -6,7 +6,7 @@ const jsdom = require("../../lib/newapi1.js");
 const { JSDOM } = require("../../lib/newapi1.js");
 const { version: packageVersion } = require("../../package.json");
 
-describe("newapi1 options", () => {
+describe("API: constructor options", () => {
   describe("referrer", () => {
     it("should allow customizing document.referrer via the referrer option", () => {
       const document = (new JSDOM(``, { referrer: "http://example.com/" })).window.document;
@@ -124,7 +124,7 @@ describe("newapi1 options", () => {
       }));
     });
 
-    // mostly tested by nodeLocation() tests
+    // mostly tested by nodeLocation() tests in ./methods.js
   });
 
   describe("cookieJar", () => {

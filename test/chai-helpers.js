@@ -1,4 +1,5 @@
 "use strict";
+// For: Mocha
 
 const exceptionTable = require("../lib/jsdom/web-idl/dom-exception-table.json");
 

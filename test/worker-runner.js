@@ -1,3 +1,4 @@
+// For: nodeunit
 function fire(event) {
   var data = Array.prototype.slice.call(arguments, 1);
   data = JSON.parse(JSON.stringify(data));
