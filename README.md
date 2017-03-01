@@ -4,7 +4,7 @@ jsdom is a pure-JavaScript implementation of many web standards, notably the WHA
 
 The latest versions of jsdom require Node.js v6 or newer. (Versions of jsdom below v10 still work with Node.js v4, but are unsupported.)
 
-jsdom has recently changed its public API completely. The old API is still supported for now; [see its documentation](./lib/old-api.md) for details.
+As of v10, jsdom has a new API (docmented below). The old API is still supported for now; [see its documentation](./lib/old-api.md) for details.
 
 ## Basic usage
 
@@ -48,10 +48,10 @@ const dom = new JSDOM(``, {
 });
 ```
 
-- `url` sets the value returned by `window.location`, `document.URL`, and `document.documentURI`, and affects things like resolution of relative URLs within the document and the same-origin restrictions and referrer used while fetching external resources. It defaults to `"about:blank"`.
+- `url` sets the value returned by `window.location`, `document.URL`, and `document.documentURI`, and affects things like resolution of relative URLs within the document and the same-origin restrictions and referrer used while fetching subresources. It defaults to `"about:blank"`.
 - `referrer` just affects the value read from `document.referrer`. It defaults to no referrer (which reflects as the empty string).
 - `contentType` affects the value read from `document.contentType`, and how the document is parsed: as HTML or as XML. Values that are not `"text/html"` or an [XML mime type](https://html.spec.whatwg.org/multipage/infrastructure.html#xml-mime-type) will throw. It defaults to `"text/html"`.
-- `userAgent` affects the value read from `navigator.userAgent`, as well as the `User-Agent` header sent while fetching external resources. It defaults to <code>\`Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${jsdomVersion}\`</code>.
+- `userAgent` affects the value read from `navigator.userAgent`, as well as the `User-Agent` header sent while fetching subresources. It defaults to <code>\`Mozilla/5.0 (${process.platform}) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/${jsdomVersion}\`</code>.
 - `includeNodeLocations` preserves the location info produced by the HTML parser, allowing you to retrieve it with the `nodeLocation()` method (described below). It defaults to `false` to give the best performance, and cannot be used with an XML content type since our XML parser does not support location info.
 
 Note that both `url` and `referrer` are canonicalized before they're used, so e.g. if you pass in `"https:example.com"`, jsdom will interpret that as if you had given `"https://example.com/"`. If you pass an unparseable URL, the call will throw. (URLs are parsed and serialized according to the [URL Standard](http://url.spec.whatwg.org/).)
@@ -60,7 +60,7 @@ Note that both `url` and `referrer` are canonicalized before they're used, so e.
 
 jsdom's most powerful ability is that it can execute scripts inside the jsdom. These scripts can modify the content of the page and access all the web platform APIs jsdom implements.
 
-However, this is also highly dangerous when dealing with untrusted content. The jsdom sandbox is not foolproof, and code running inside the DOM's `<script>`s can, if it tries hard enough, get access to the Node environment, and thus to your machine. As such, the ability to execute scripts embedded in the HTML is disabled by default:
+However, this is also highly dangerous when dealing with untrusted content. The jsdom sandbox is not foolproof, and code running inside the DOM's `<script>`s can, if it tries hard enough, get access to the Node.js environment, and thus to your machine. As such, the ability to execute scripts embedded in the HTML is disabled by default:
 
 ```js
 const dom = new JSDOM(`<body>
@@ -130,19 +130,19 @@ virtualConsole.sendTo(console);
 
 There is also a special event, `"jsdomError"`, which will fire with error objects to report errors from jsdom itself. This is similar to how error messages often show up in web browser consoles, even if they are not initiated by `console.error`. So far, the following errors are output this way:
 
-- Errors loading or parsing external resources (scripts, stylesheets, frames, and iframes)
+- Errors loading or parsing subresources (scripts, stylesheets, frames, and iframes)
 - Script execution errors that are not handled by a window `onerror` event handler that returns `true` or calls `event.preventDefault()`
 - Not-implemented errors resulting from calls to methods, like `window.alert`, which jsdom does not implement, but installs anyway for web compatibility
 
-If you're using `sendTo(console)` to send errors to `console`, by default it will call `console.error` with information from `"jsdomError"` events. If you'd prefer to maintain a strict one-to-one mapping of events to method calls, and perhaps handle `"jsdomError"`s yourself, then you can do
+If you're using `sendTo(c)` to send errors to `c`, by default it will call `console.error` with information from `"jsdomError"` events. If you'd prefer to maintain a strict one-to-one mapping of events to method calls, and perhaps handle `"jsdomError"`s yourself, then you can do
 
 ```js
-virtualConsole.sendTo(console, { omitJSDOMErrors: true });
+virtualConsole.sendTo(c, { omitJSDOMErrors: true });
 ```
 
 ### Cookie jars
 
-Like web browsers, jsdom has the concept of a cookie jar, storing HTTP cookies. Cookies that have a URL on the same domain as the document, and are not marked HTTP-only, are accessible via the `document.cookie` API. Additionally, all cookies in the cookie jar will impact the fetching of external resources.
+Like web browsers, jsdom has the concept of a cookie jar, storing HTTP cookies. Cookies that have a URL on the same domain as the document, and are not marked HTTP-only, are accessible via the `document.cookie` API. Additionally, all cookies in the cookie jar will impact the fetching of subresources.
 
 By default, the `JSDOM` constructor will return an instance with an empty cookie jar. To create your own cookie jar and pass it to jsdom, you can override this default by doing
 
@@ -176,7 +176,7 @@ Once you have constructed a `JSDOM` object, it will have the following useful ca
 
 ### Properties
 
-The property `window` retrieves the `Window` object that you created.
+The property `window` retrieves the `Window` object that was created for you.
 
 The properties `virtualConsole` and `cookieJar` reflect the options you pass in, or the defaults created for you if nothing was passed in for those options.
 
@@ -221,18 +221,19 @@ Note that this feature only works if you have set the `includeNodeLocations` opt
 
 ### Running vm-created scripts with `runVMScript(script)`
 
-The built-in `vm` module of Node.js allows you to create `Script` instances, which can be compiled ahead of time and then run mutliple times on a given _VM context_. Behind the scenes, a jsdom `Window` is indeed a VM context. To get access to this ability, use the `runVMScript()` method:
+The built-in `vm` module of Node.js allows you to create `Script` instances, which can be compiled ahead of time and then run mutliple times on a given "VM context". Behind the scenes, a jsdom `Window` is indeed a VM context. To get access to this ability, use the `runVMScript()` method:
 
 ```js
 const { Script } = require("vm");
 
 const dom = new JSDOM(``, { runScripts: "outside-only" });
-const s = new Script(
-  `if (!this.ran) {
+const s = new Script(`
+  if (!this.ran) {
     this.ran = 0;
   }
 
-  ++this.ran;`);
+  ++this.ran;
+`);
 
 dom.runVMScript(s);
 dom.runVMScript(s);
@@ -241,13 +242,15 @@ dom.runVMScript(s);
 dom.window.ran === 3;
 ```
 
+This is somewhat-advanced functionality, and we advise sticking to normal DOM APIs (such as `window.eval()` or `document.createElement("script")`) unless you have very specific needs.
+
 ### Reconfiguring the jsdom with `reconfigure(settings)`
 
 The `top` property on `window` is marked `[Unforgeable]` in the spec, meaning it is a non-configurable own property and thus cannot be overridden or shadowed by normal code running inside the jsdom, even using `Object.defineProperty`.
 
 Similarly, at present jsdom does not handle navigation (such as setting `window.location.href === "https://example.com/"`); doing so will cause the virtual console to emit a `"jsdomError"` explaining that this feature is not implemented, and nothing will change: there will be no new `Window` or `Document` object, and the existing `window`'s `location` object will still have all the same property values.
 
-However, if you're acting from outside the window, e.g. in some test framework that creates jsdoms, you can override both of these using the special `reconfigure()` method:
+However, if you're acting from outside the window, e.g. in some test framework that creates jsdoms, you can override one or both of these using the special `reconfigure()` method:
 
 ```js
 const dom = new JSDOM();
@@ -261,7 +264,7 @@ dom.window.top === myFakeTopForTesting;
 dom.window.location.href === "https://example.com/";
 ```
 
-Note that changing the jsdom's URL will impact all APIs that return the current document URL, such as `window.location`, `document.URL`, and `document.documentURI`, as well as resolution of relative URLs within the document, and the same-origin checks and referrer used while fetching external resources. It will not, however, perform a navigation to the contents of that URL; the contents of the DOM will remain unchanged.
+Note that changing the jsdom's URL will impact all APIs that return the current document URL, such as `window.location`, `document.URL`, and `document.documentURI`, as well as resolution of relative URLs within the document, and the same-origin checks and referrer used while fetching subresources. It will not, however, perform a navigation to the contents of that URL; the contents of the DOM will remain unchanged, and no new instances of `Window`, `Document`, etc. will be created.
 
 ## Convenience APIs
 
@@ -280,12 +283,12 @@ The returned promise will fulfill with a `JSDOM` instance if the URL is valid an
 The options provided to `fromURL()` are similar to those provided to the `JSDOM` constructor, with the following additional restrictions and consequences:
 
 - The `url` and `contentType` options cannot be provided.
-- The `referrer` option is used as the HTTP `Referer` request header of the initial request.
+- The `referrer` option is used as the HTTP `Referer` request header of the initial request, in addition to subresource requests.
 - The `userAgent` option is used as the HTTP `User-Agent` request header of any requests.
 - The resulting jsdom's URL, content type, and referrer are determined from the response.
 - Any cookies set via HTTP `Set-Cookie` response headers are stored in the jsdom's cookie jar. Similarly, any cookies already in a supplied cookie jar are sent as HTTP `Cookie` request headers.
 
-Note how the initial request is not infinitely customizable; `fromURL()` is meant to be a convenience API for the majority of cases. If you need greater control over the initial request, you should perform it yourself, and then use the `JSDOM` constructor manually.
+The initial request is not infinitely customizable to the same extent as is possible in a package like [request](https://www.npmjs.com/package/request); `fromURL()` is meant to be a convenience API for the majority of cases. If you need greater control over the initial request, you should perform it yourself, and then use the `JSDOM` constructor manually.
 
 ### `fromFile()`
 
@@ -297,9 +300,9 @@ JSDOM.fromFile("stuff.html", options).then(dom => {
 });
 ```
 
-The returned promise will fulfill with a `JSDOM` instance if the given filename can be opened. As usual in Node.js APIs, the filename is given relative to the current working directory.
+The returned promise will fulfill with a `JSDOM` instance if the given file can be opened. As usual in Node.js APIs, the filename is given relative to the current working directory.
 
-The options provided to `fromFile()` are similar to those provided to the `JSDOM` constructor, with the following additional restrictions and consequences:
+The options provided to `fromFile()` are similar to those provided to the `JSDOM` constructor, with the following additional defaults:
 
 - The `url` option will default to a file URL corresponding to the given filename, instead of to `"about:blank"`.
 - The `contentType` option will default to `"application/xhtml+xml"` if the given filename ends in `.xhtml` or `.xml`; otherwise it will continue to default to `"text/html"`.
@@ -316,7 +319,7 @@ frag.querySelector("strong").textContent = "Why hello there!";
 // etc.
 ```
 
-Here `frag` is a [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) instance, whose contents are created by parsing the provided string. The parsing is done using a `<template>` element, so you can include any element there (including ones with weird parsing requirements like `<td>`).
+Here `frag` is a [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) instance, whose contents are created by parsing the provided string. The parsing is done using a `<template>` element, so you can include any element there (including ones with weird parsing rules like `<td>`).
 
 You can pass in the same options to `fragment()` as you would to the `JSDOM` constructor.
 
@@ -345,11 +348,21 @@ Timers in the jsdom (set by `window.setTimeout()` or `window.setInterval()`) wil
 
 If you want to be sure to shut down a jsdom window, use `window.close()`, which will terminate all running timers (and also remove any event listeners on the window and document).
 
+### Running jsdom inside a web browser
+
+jsdom has some support for being run inside a web browser, using [browserify](https://browserify.org/). That is, inside a web browser, you can use a browserified jsdom to create an entirely self-contained set of plain JavaScript objects which look and act much like the browser's existing DOM objects, while being entirely independent of them. "Virtual DOM", indeed!
+
+jsdom's primary target is still Node.js, and so we use language features that are only present in recent Node.js versions (namely, Node.js v6+). Thus, older browsers will likely not work. (Even transpilation will not help much: we plan to use `Proxy`s extensively throughout the course of jsdom v10.x.)
+
+Notably, jsdom works well inside a web worker. The original contributor, [@lawnsea](TODO), who made this possible, has [published a paper](TODO) about the results.
+
+Not everything works perfectly when running jsdom inside a web browser. Sometimes that is because of fundamental limitations (such as not having filesystem access), but sometimes it is simply because we haven't spent enough time making the appropriate small tweaks. Bug reports are certainly welcome.
+
 ## Caveats
 
 ### Asynchronous script loading
 
-One thing people often have trouble with when using jsdom is asynchronous script loading. Many pages loads scripts asynchronously, but there is no way to tell when they're done doing so, and thus when it's a good time to run your code and inspect the resulting DOM structure. This is a fundamental limitation; we cannot predict what scripts on the web page will do, and so cannot tell you when they are done loading more scripts.
+People often have trouble with asynchronous script loading when using jsdom. Many pages loads scripts asynchronously, but there is no way to tell when they're done doing so, and thus when it's a good time to run your code and inspect the resulting DOM structure. This is a fundamental limitation; we cannot predict what scripts on the web page will do, and so cannot tell you when they are done loading more scripts.
 
 This can be worked around in a few ways. The best way, if you control the page in question, is to use whatever mechanisms are given by the script loader to detect when loading is done. For example, if you're using a module loader like RequireJS, the code could look like:
 
@@ -374,15 +387,31 @@ If you do not control the page, you could try workarounds such as polling for th
 
 For more details, see the discussion in [#640](https://github.com/tmpvar/jsdom/issues/640), especially [@matthewkastor](https://github.com/matthewkastor)'s [insightful comment](https://github.com/tmpvar/jsdom/issues/640#issuecomment-22216965).
 
+### Shared constructors and prototypes
+
+At the present time, for most web platform APIs, jsdom shares the same class definition between multiple seemingly-independent jsdoms. That means that, for example, the following situation can occur:
+
+```js
+const dom1 = new JSDOM();
+const dom2 = new JSDOM();
+
+dom1.window.Element.prototype.expando = "blah";
+console.log(dom2.window.document.createElement("frameset").expando); // logs "blah"
+```
+
+This is done mainly for performance and memory reasons: creating separate copies of all the many classes on the web platform, each time we create a jsdom, would be rather expensive.
+
+Nevertheless, we remain interested in one day providing an option to create an "independent" jsdom, at the cost of some performance.
+
 ### Missing features in the new API
 
-Compared to the old JSDOM API from v9.x and before, the new API missing the ability to control resource loads. Previous versions of jsdom allowed you to set options that were used when making requests (both for the initial request, in the old equivalent of `JSDOM.fromURL()`, and subresource requests). They also allowed you to control which subresources were requested and applied to the main document, so that you could e.g. download stylesheets but not scripts. Finally, they provided a customizable resource loader that let you intercept any outgoing request and fulfill it with a completely synthetic response.
+Compared to the old JSDOM API from v9.x and before, the new API is noticably missing the ability to control resource loads. Previous versions of jsdom allowed you to set options that were used when making requests (both for the initial request, in the old equivalent of `JSDOM.fromURL()`, and for subresource requests). They also allowed you to control which subresources were requested and applied to the main document, so that you could e.g. download stylesheets but not scripts. Finally, they provided a customizable resource loader that let you intercept any outgoing request and fulfill it with a completely synthetic response.
 
 None of these features are yet in the new jsdom API, although we are hoping to add them back soon! This requires a decent amount of behind-the-scenes work to implement in a reasonable way, unfortunately.
 
 In the meantime, please feel free to use the old jsdom API to get access to this functionality. It is supported and maintained, although it will not be getting new features. The documentation is found in [lib/old-api.md](./lib/old-api.md).
 
-### Limitations of jsdom
+### Unimplemented parts of the web platform
 
 Although we enjoy adding new features to jsdom and keeping it up to date with the latest web specs, it has many missing APIs. Please feel free to file an issue for anything missing, but we're a small and busy team, so a pull request might work even better.
 
@@ -397,5 +426,8 @@ Often you can work around these limitations in your code, e.g. by creating new `
 
 ## Getting help
 
-- [Mailing list](http://groups.google.com/group/jsdom)
-- IRC channel: [#jsdom on freenode](irc://irc.freenode.net/jsdom)
+If you need help with jsdom, please feel free to use any of the following venues:
+
+- The [mailing list](http://groups.google.com/group/jsdom) (best for "how do I" questions)
+- The [issue tracker](https://github.com/tmpvar/jsdom/issues) (best for bug reports)
+- The IRC channel: [#jsdom on freenode](irc://irc.freenode.net/jsdom)

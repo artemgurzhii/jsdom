@@ -1,6 +1,8 @@
 # jsdom old API
 
-The old jsdom API, from before v10, is hard to use and understand, but for now still has more features than the new API introduced in v10. As such, it is still supported. (However, no new features will be added to it.)
+The old jsdom API, from before v10, is hard to use and understand, and has bad defaults. But for now, it still has more features than the new API introduced in v10. As such, it is still supported, until we can port over all important features (notably custom resource loading) to the new API.
+
+No new features will be added to the old API, but bug reports are accepted.
 
 ## Easymode: `jsdom.env`
 
