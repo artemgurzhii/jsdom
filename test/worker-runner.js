@@ -24,7 +24,6 @@ self.onmessage = function (e) {
     "level3/textContent.js": require("../test/level3/textContent.js"),
     "to-port-to-wpts/class-list.js": require("../test/to-port-to-wpts/class-list.js"),
     "to-port-to-wpts/dom-implementation.js": require("../test/to-port-to-wpts/dom-implementation.js"),
-    "to-port-to-wpts/event-target.js": require("../test/to-port-to-wpts/event-target.js"),
     "to-port-to-wpts/node-clone-node.js": require("../test/to-port-to-wpts/node-clone-node.js"),
     "to-port-to-wpts/non-document-type-child-node.js": require("../test/to-port-to-wpts/non-document-type-child-node.js"),
     "to-port-to-wpts/htmlanchorelement.js": require("../test/to-port-to-wpts/htmlanchorelement.js"),
