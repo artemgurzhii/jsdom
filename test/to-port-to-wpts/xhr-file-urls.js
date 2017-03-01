@@ -1,7 +1,7 @@
 "use strict";
 const fs = require("fs");
-const jsdom = require("../..");
-const toFileUrl = require("../util").toFileUrl(__dirname);
+const jsdom = require("../../lib/old-api.js");
+const toFileUrl = require("../util.js").toFileUrl(__dirname);
 
 exports["Getting a file URL should work (from the same file URL)"] = t => {
   // From https://github.com/tmpvar/jsdom/pull/1180

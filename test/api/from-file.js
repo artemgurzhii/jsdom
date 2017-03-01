@@ -3,7 +3,7 @@ const path = require("path");
 const { assert } = require("chai");
 const { describe, it } = require("mocha-sugar-free");
 
-const { JSDOM } = require("../../lib/newapi1.js");
+const { JSDOM } = require("../..");
 
 require("chai").use(require("../chai-helpers.js"));
 

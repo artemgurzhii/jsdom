@@ -1,7 +1,7 @@
 var path = require('path');
 var fs = require('fs');
-var jsdom = require('../../lib/jsdom');
-var toFileUrl = require('../util').toFileUrl(__dirname);
+const jsdom = require("../../lib/old-api.js");
+var toFileUrl = require('../util.js').toFileUrl(__dirname);
 
 exports.tests = {
   frame_parent: function(test) {

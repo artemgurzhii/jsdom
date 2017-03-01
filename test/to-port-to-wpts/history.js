@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 exports["a default window should have a history object with correct default values"] = t => {
   const window = jsdom.jsdom().defaultView;

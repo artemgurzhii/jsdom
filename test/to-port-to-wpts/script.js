@@ -1,4 +1,4 @@
-var jsdom = require('../../lib/jsdom'),
+var jsdom = require('../../lib/oldapi.js'),
     path = require('path'),
     fs = require('fs'),
     http = require('http'),

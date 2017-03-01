@@ -1,10 +1,8 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const utils = require("../../lib/jsdom/utils");
+const utils = require("../../lib/jsdom/utils.js");
 
 describe("jsdom/utils", () => {
   specify("defineGetter defines a getter", () => {

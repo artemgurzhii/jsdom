@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 // Tests for MessageEvent
 // Spec: https://html.spec.whatwg.org/multipage/comms.html#messageevent

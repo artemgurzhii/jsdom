@@ -1,12 +1,9 @@
 "use strict";
+const jsdom = require("../../lib/old-api.js");
+const { injectIFrame, injectIFrameWithScript, todo } = require("../util.js");
 
 // Tests for window.postMessage(message, targetOrigin, transfer)
 // Spec: https://html.spec.whatwg.org/#crossDocumentMessages
-
-const jsdom = require("../..");
-const injectIFrame = require("../util").injectIFrame;
-const injectIFrameWithScript = require("../util").injectIFrameWithScript;
-const todo = require("../util").todo;
 
 exports["throws SyntaxError on invalid targetOrigin"] = t => {
   const document = jsdom.jsdom();

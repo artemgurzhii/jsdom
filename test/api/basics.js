@@ -2,7 +2,7 @@
 const { assert } = require("chai");
 const { describe, it } = require("mocha-sugar-free");
 
-const { JSDOM } = require("../../lib/newapi1.js");
+const { JSDOM } = require("../..");
 
 describe("JSDOM instances: basics", () => {
   it("should have a window and a document", () => {

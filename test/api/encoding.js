@@ -5,7 +5,7 @@ const { assert } = require("chai");
 const { describe, it, before, after } = require("mocha-sugar-free");
 const { createServer } = require("../util.js");
 
-const { JSDOM } = require("../../lib/newapi1.js");
+const { JSDOM } = require("../..");
 
 function fixturePath(fixture) {
   return path.resolve(__dirname, "fixtures/encoding", fixture);

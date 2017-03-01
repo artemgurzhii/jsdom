@@ -1,6 +1,6 @@
 "use strict";
-const jsdom = require("../..");
-const nodeResolverPromise = require("../util").nodeResolverPromise;
+const jsdom = require("../../lib/old-api.js");
+const nodeResolverPromise = require("../util.js").nodeResolverPromise;
 
 const globalPool = { maxSockets: 6 };
 

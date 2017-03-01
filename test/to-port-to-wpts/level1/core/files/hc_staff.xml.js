@@ -1,5 +1,5 @@
 "use strict";
-var jsdom = require("../../../../..");
+const jsdom = require("../../../../../lib/old-api.js");
 
 exports.hc_staff = function () {
   return jsdom.jsdom(`

@@ -1,11 +1,9 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../..");
-const readTestFixture = require("../util").readTestFixture;
+const jsdom = require("../../lib/old-api.js");
+const { readTestFixture } = require("../util.js");
 
 function testHTMLDocument(document) {
   assert.strictEqual(document.getElementsByTagName("body").length, 1);

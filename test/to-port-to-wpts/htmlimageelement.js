@@ -2,8 +2,8 @@
 const fs = require("fs");
 const path = require("path");
 const http = require("http");
-const jsdom = require("../..");
-const isCanvasInstalled = require("../util").isCanvasInstalled;
+const jsdom = require("../../lib/old-api.js");
+const { isCanvasInstalled } = require("../util.js");
 const toFileUrl = require("../util").toFileUrl(__dirname);
 
 exports["Image constructor should create a HTMLImageElement with specified width and height"] = t => {

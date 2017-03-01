@@ -1,8 +1,8 @@
 "use strict";
 const fs = require("fs");
 const path = require("path");
-const jsdom = require("../..");
-const isCanvasInstalled = require("../util").isCanvasInstalled;
+const jsdom = require("../../lib/old-api.js");
+const { isCanvasInstalled } = require("../util.js");
 
 // Tests for the HTML canvas element
 // Spec: https://html.spec.whatwg.org/multipage/scripting.html#the-canvas-element

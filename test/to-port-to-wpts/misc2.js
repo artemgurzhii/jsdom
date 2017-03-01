@@ -1,19 +1,17 @@
 "use strict";
-
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
 const path = require("path");
 const fs = require("fs");
-const jsdom = require("../..");
-const toFileUrl = require("../util").toFileUrl(__dirname);
 const http = require("http");
 const https = require("https");
-const EventEmitter = require("events").EventEmitter;
+const { EventEmitter } = require("events");
 const zlib = require("zlib");
 const parseURL = require("url").parse;
 const vm = require("vm");
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
+
+const jsdom = require("../../lib/old-api.js");
+const toFileUrl = require("../util.js").toFileUrl(__dirname);
 
 function tmpWindow() {
   return jsdom.jsdom().defaultView;

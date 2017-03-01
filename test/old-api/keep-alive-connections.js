@@ -1,11 +1,9 @@
 "use strict";
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-const beforeEach = require("mocha-sugar-free").beforeEach;
-const afterEach = require("mocha-sugar-free").afterEach;
-const createServer = require("../util.js").createServer;
+const { assert } = require("chai");
+const { describe, specify, beforeEach, afterEach } = require("mocha-sugar-free");
+const { createServer } = require("../util.js");
 
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 const routes = {
   "/html": `<!DOCTYPE html><html><head><script src="/js"></script></head><body></body></html>`,

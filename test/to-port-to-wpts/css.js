@@ -1,10 +1,8 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 describe("browser/css", () => {
   specify("should not give CSS parsing errors upon encountering @-moz-document (GH-687)", { async: true }, t => {

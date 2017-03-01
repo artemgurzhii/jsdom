@@ -1,6 +1,5 @@
 "use strict";
-
-const jsdom = require("../..").jsdom;
+const { jsdom } = require("../../lib/old-api.js");
 
 exports["TextNode should implement NonDocumentTypeChildNode:nextElementSibling"] = t => {
   const doc = jsdom("<div id='1'>1</div> <div id='2'>2</div>");

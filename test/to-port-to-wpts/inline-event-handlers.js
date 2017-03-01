@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..").jsdom;
+const { jsdom } = require("../../lib/old-api.js");
 
 exports["inline event handlers have the correct global scope"] = t => {
   const doc = jsdom(`<div onclick="document.foo = 'clicked'"></div>`);

@@ -1,6 +1,6 @@
 "use strict";
-const jsdom = require("../..");
-const load = require("../util").load(__dirname);
+const jsdom = require("../../lib/old-api.js");
+const load = require("../util.js").load(__dirname);
 
 function descendants(root) {
   let ret = [];

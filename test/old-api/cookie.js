@@ -1,14 +1,10 @@
 "use strict";
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-const before = require("mocha-sugar-free").before;
-const after = require("mocha-sugar-free").after;
-const createServer = require("../util.js").createServer;
-const createHTTPSServer = require("../util.js").createHTTPSServer;
+const { assert } = require("chai");
+const { describe, specify, before, after } = require("mocha-sugar-free");
+const { createServer, createHTTPSServer } = require("../util.js");
 
-const jsdom = require("../..");
-const toFileUrl = require("../util").toFileUrl(__dirname);
+const jsdom = require("../../lib/old-api.js");
+const toFileUrl = require("../util.js").toFileUrl(__dirname);
 
 const testCookies = [
   "Test1=Basic; expires=Wed, 13-Jan-2051 22:23:01 GMT",

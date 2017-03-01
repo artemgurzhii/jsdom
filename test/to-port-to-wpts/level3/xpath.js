@@ -1,6 +1,6 @@
-var jsdom = require("../../..");
-var xpath = require('../../../lib/jsdom/level3/xpath')(jsdom.jsdom().defaultView);
-var domTestHelper = require('../files/DOMTestCase');
+const jsdom = require("../../../lib/old-api.js");
+const xpath = require('../../../lib/jsdom/level3/xpath')(jsdom.jsdom().defaultView);
+const domTestHelper = require('../files/DOMTestCase');
 
 exports.tests = {};
 

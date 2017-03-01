@@ -1,9 +1,9 @@
-var fs = require('fs');
-var path = require('path');
-var jsdom = require("../../..");
-var toPathname = require("../../util").toPathname(__dirname);
-var toFileUrl = require("../../util").toFileUrl(__dirname);
-var load = require("../../util").load(__dirname +  "/html/");
+const fs = require("fs");
+const path = require("path");
+const jsdom = require("../../../lib/old-api.js");
+const toPathname = require("../../util.js").toPathname(__dirname);
+const toFileUrl = require("../../util.js").toFileUrl(__dirname);
+const load = require("../../util.js").load(__dirname +  "/html/");
 
 function getImplementation() {
   return jsdom.jsdom().implementation;

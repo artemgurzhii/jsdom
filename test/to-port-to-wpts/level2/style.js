@@ -1,9 +1,8 @@
 "use strict";
-
-var jsdom = require("../../..");
-var http = require("http");
-var fs = require("fs");
-var path = require("path");
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+const jsdom = require("../../../lib/old-api.js");
 
 exports.tests = {
 

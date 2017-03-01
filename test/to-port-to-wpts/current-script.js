@@ -1,6 +1,6 @@
 "use strict";
-const jsdom = require("../..");
-const toFileUrl = require("../util").toFileUrl(__dirname);
+const jsdom = require("../../lib/old-api.js");
+const toFileUrl = require("../util.js").toFileUrl(__dirname);
 
 exports["document.currentScript is null when not executing <script>"] = t => {
   const window = jsdom.jsdom().defaultView;

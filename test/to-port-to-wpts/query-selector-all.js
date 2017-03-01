@@ -1,6 +1,6 @@
 "use strict";
-const jsdom = require("../..").jsdom;
-const load = require("../util").load(__dirname);
+const { jsdom } = require("../../lib/old-api.js");
+const load = require("../util.js").load(__dirname);
 
 // Tests for ParentNode's querySelectorAll
 // Spec: https://dom.spec.whatwg.org/#dom-parentnode-queryselectorall

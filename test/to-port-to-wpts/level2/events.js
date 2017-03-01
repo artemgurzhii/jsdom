@@ -1,6 +1,6 @@
 "use strict";
-var testcase = require('nodeunit').testCase;
-var jsdom = require("../../..");
+const testcase = require("nodeunit").testCase;
+const jsdom = require("../../../lib/old-api.js");
 
 class EventMonitor {
   constructor() {

@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 exports["window.location and document.location should be equal"] = t => {
   const window = jsdom.jsdom().defaultView;

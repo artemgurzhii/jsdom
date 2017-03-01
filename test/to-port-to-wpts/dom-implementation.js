@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 exports["new DOMImplementation() is not allowed"] = t => {
   const DOMImplementation = jsdom.jsdom().defaultView.DOMImplementation;

@@ -1,15 +1,11 @@
 "use strict";
-
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const env = require("../..").env;
-const createVirtualConsole = require("../..").createVirtualConsole;
-const serializeDocument = require("../..").serializeDocument;
 const path = require("path");
 const http = require("http");
-const toFileUrl = require("../util").toFileUrl(__dirname);
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
+
+const { env, createVirtualConsole, serializeDocument } = require("../../lib/old-api.js");
+const toFileUrl = require("../util.js").toFileUrl(__dirname);
 
 describe("jsdom/env", () => {
   specify("with invalid arguments", () => {

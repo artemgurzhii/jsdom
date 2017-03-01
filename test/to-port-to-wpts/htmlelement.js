@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 const nonInheritedTags = [
   "article", "section", "nav", "aside", "hgroup", "header", "footer", "address", "dt",

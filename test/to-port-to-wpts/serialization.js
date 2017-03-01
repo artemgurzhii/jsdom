@@ -1,10 +1,8 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 // These tests are regression tests, not systematic serialization tests. They are compiled from the bug tracker.
 

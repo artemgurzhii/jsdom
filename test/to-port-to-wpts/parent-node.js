@@ -1,6 +1,5 @@
 "use strict";
-
-const load = require("../util").load(__dirname);
+const load = require("../util.js").load(__dirname);
 
 function nodeName(node) {
   return node && node.nodeName ? node.nodeName : node;

@@ -1,11 +1,9 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const readTestFixture = require("../util").readTestFixture;
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
+const { readTestFixture } = require("../util.js");
 
 // These tests are mostly random regression tests, not systematic parsing tests. They are compiled from the bug tracker.
 describe("jsdom/parsing", () => {

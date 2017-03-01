@@ -91,5 +91,5 @@
     "benchmark-browser": "node ./benchmark/runner --bundle",
     "convert-idl": "node ./scripts/webidl/convert"
   },
-  "main": "./lib/jsdom"
+  "main": "./lib/api.js"
 }

@@ -1,11 +1,9 @@
 "use strict";
-
 const http = require("http");
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 describe("jsdom/resource-loading", () => {
   specify("<script/> loading errors show up as jsdomErrors in the virtual console", { async: true }, t => {

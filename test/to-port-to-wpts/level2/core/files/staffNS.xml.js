@@ -1,4 +1,4 @@
-var jsdom = require("../../../../..");
+const jsdom = require("../../../../../lib/old-api.js");
 
 // Our XML parser is not namespace aware so we can't just parse the string
 

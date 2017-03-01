@@ -2,8 +2,8 @@
 const { assert } = require("chai");
 const { describe, it } = require("mocha-sugar-free");
 
-const jsdom = require("../../lib/newapi1.js");
-const { JSDOM } = require("../../lib/newapi1.js");
+const jsdom = require("../..");
+const { JSDOM } = require("../..");
 const { version: packageVersion } = require("../../package.json");
 
 describe("API: constructor options", () => {

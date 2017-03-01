@@ -1,10 +1,8 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../../..");
+const jsdom = require("../../../lib/old-api.js");
 const staff = require("./core/files/staff.xml");
 const hc_staff = require("./core/files/hc_staff.xml");
 const hc_nodtdstaff = require("./core/files/hc_nodtdstaff.xml");

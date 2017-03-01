@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..").jsdom;
+const jsdom = require("../../lib/old-api.js");
 
 // Tests for node.cloneNode
 // Spec: https://dom.spec.whatwg.org/#dom-node-clonenodedeep

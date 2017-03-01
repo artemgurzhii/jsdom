@@ -1,11 +1,9 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../../lib/jsdom");
-const serializeDocument = require("../../lib/jsdom").serializeDocument;
+const jsdom = require("../../lib/old-api.js");
+const { serializeDocument } = require("../../lib/old-api.js");
 
 describe("browser/index", () => {
   specify("notfound_getelementsbyclassname", () => {

@@ -1,5 +1,5 @@
 "use strict";
-var jsdom = require("../../../../..");
+const jsdom = require("../../../../../lib/old-api.js");
 
 exports.staff = function () {
   // NB: removed "<?PItarget PIdata?>" from ent4 because it breaks htmlparser2     https://github.com/fb55/htmlparser2/issues/117

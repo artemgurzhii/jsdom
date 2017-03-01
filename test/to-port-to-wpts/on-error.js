@@ -1,8 +1,6 @@
 "use strict";
-const jsdom = require("../..").jsdom;
-const createVirtualConsole = require("../..").createVirtualConsole;
-const toFileUrl = require("../util").toFileUrl;
-const todo = require("../util").todo;
+const { jsdom, createVirtualConsole } = require("../../lib/old-api.js");
+const { toFileUrl, todo } = require("../util.js");
 
 exports["onerror catches exceptions thrown in addEventListener event handlers"] = t => {
   const doc = jsdom("", { url: "http://example.com" });

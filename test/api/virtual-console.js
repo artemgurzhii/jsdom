@@ -2,7 +2,7 @@
 const { assert } = require("chai");
 const { describe, it } = require("mocha-sugar-free");
 
-const { JSDOM, VirtualConsole } = require("../../lib/newapi1.js");
+const { JSDOM, VirtualConsole } = require("../..");
 
 const consoleMethods = [
   "assert",

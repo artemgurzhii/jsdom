@@ -1,7 +1,7 @@
 "use strict";
-const jsdom = require("../..");
 const http = require("http");
 const portfinder = require("portfinder");
+const jsdom = require("../../lib/old-api.js");
 
 let testHost = null;
 

@@ -1,10 +1,8 @@
 "use strict";
+const { assert } = require("chai");
+const { describe, specify } = require("mocha-sugar-free");
 
-const assert = require("chai").assert;
-const describe = require("mocha-sugar-free").describe;
-const specify = require("mocha-sugar-free").specify;
-
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 // These are tests specifically designed to showcase possible issues when run inside a worker (browserified), where we
 // can't run the full test suite.

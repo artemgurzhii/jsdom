@@ -1,5 +1,5 @@
 "use strict";
-const jsdom = require("../..");
+const jsdom = require("../../lib/old-api.js");
 
 exports["html input should handle value/defaultValue correctly"] = t => {
   const input = jsdom.jsdom("<input>").querySelector("input");
