@@ -19,22 +19,22 @@ self.onmessage = function (e) {
   var fileFilter, testFilter;
 
   var modules = {
-    "level2/core": require("../test/level2/core"),
-    "level2/events": require("../test/level2/events"),
-    "level3/textContent.js": require("../test/level3/textContent.js"),
-    "to-port-to-wpts/class-list.js": require("../test/to-port-to-wpts/class-list.js"),
-    "to-port-to-wpts/dom-implementation.js": require("../test/to-port-to-wpts/dom-implementation.js"),
-    "to-port-to-wpts/node-clone-node.js": require("../test/to-port-to-wpts/node-clone-node.js"),
-    "to-port-to-wpts/non-document-type-child-node.js": require("../test/to-port-to-wpts/non-document-type-child-node.js"),
-    "to-port-to-wpts/htmlanchorelement.js": require("../test/to-port-to-wpts/htmlanchorelement.js"),
-    "to-port-to-wpts/htmlcanvaselement.js": require("../test/to-port-to-wpts/htmlcanvaselement.js"),
-    "to-port-to-wpts/htmlelement.js": require("../test/to-port-to-wpts/htmlelement.js"),
-    "to-port-to-wpts/location.js": require("../test/to-port-to-wpts/location.js"),
-    "to-port-to-wpts/inline-event-handlers.js": require("../test/to-port-to-wpts/inline-event-handlers.js"),
-    "to-port-to-wpts/message-event.js": require("../test/to-port-to-wpts/message-event.js"),
-    "to-port-to-wpts/post-message.js": require("../test/to-port-to-wpts/post-message.js"),
-    "to-port-to-wpts/on-error.js": require("../test/to-port-to-wpts/on-error.js"),
-    "to-port-to-wpts/history": require("../test/to-port-to-wpts/history")
+    "to-port-to-wpts/level2/core.js": require("./to-port-to-wpts/level2/core.js"),
+    "to-port-to-wpts/level2/events.js": require("./to-port-to-wpts/level2/events.js"),
+    "to-port-to-wpts/level3/textContent.js": require("./to-port-to-wpts/level3/textContent.js"),
+    "to-port-to-wpts/class-list.js": require("./to-port-to-wpts/class-list.js"),
+    "to-port-to-wpts/dom-implementation.js": require("./to-port-to-wpts/dom-implementation.js"),
+    "to-port-to-wpts/node-clone-node.js": require("./to-port-to-wpts/node-clone-node.js"),
+    "to-port-to-wpts/non-document-type-child-node.js": require("./to-port-to-wpts/non-document-type-child-node.js"),
+    "to-port-to-wpts/htmlanchorelement.js": require("./to-port-to-wpts/htmlanchorelement.js"),
+    "to-port-to-wpts/htmlcanvaselement.js": require("./to-port-to-wpts/htmlcanvaselement.js"),
+    "to-port-to-wpts/htmlelement.js": require("./to-port-to-wpts/htmlelement.js"),
+    "to-port-to-wpts/location.js": require("./to-port-to-wpts/location.js"),
+    "to-port-to-wpts/inline-event-handlers.js": require("./to-port-to-wpts/inline-event-handlers.js"),
+    "to-port-to-wpts/message-event.js": require("./to-port-to-wpts/message-event.js"),
+    "to-port-to-wpts/post-message.js": require("./to-port-to-wpts/post-message.js"),
+    "to-port-to-wpts/on-error.js": require("./to-port-to-wpts/on-error.js"),
+    "to-port-to-wpts/history.js": require("./to-port-to-wpts/history.js")
   };
 
   var modulesToRun = {};
